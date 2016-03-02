@@ -70,5 +70,5 @@ theme: landscape
 deploy:
   type: git
   repo: https://github.com/SmallBlackCat/smallblackcat.github.io.git
-  branch: gh-pages
+  branch: master
   #message: [message]
