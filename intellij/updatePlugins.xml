@@ -16,9 +16,9 @@ available at this repository.
     <plugin
             id="com.tencent.cloud.snippet.intellij"
             url="https://smallblackcat.github.io/intellij/intellij-0.1.0.zip"
-            version="0.1.0"
-            description="腾讯云产品API插件">
-            name="Tencent Cloud Products API snippets">
+            version="0.1.0">
+        <name>Tencent Cloud Products API snippets</name>
+        <description>腾讯云产品API插件</description>
         <idea-version since-build="181.3"/>
     </plugin>
 
