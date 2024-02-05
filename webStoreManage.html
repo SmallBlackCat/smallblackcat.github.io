@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Read Cookies, SessionStorage and LocalStorage</title>
+  <style>
+    button {
+      margin-top: 1em;
+      display: block;
+    }
+    #extraFields {
+      margin-bottom: 1rem;
+      background-color: #f2f2f2;
+      padding: 10px;
+      border-radius: 5px;
+      display: none;
+    }
+    #extraFields label {
+      margin-top: 10px;
+    }
+    #extraFields input,
+    #extraFields select {
+      margin-bottom: 10px;
+    }
+    #dynamicFieldContainer {
+      display: none;
+    }
+    #output {
+      white-space: pre-wrap;
+      background-color: #eaeaea;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 1em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    .headerRow {
+      background-color: #f0bd57;
+    }
+    .oddRow {
+      background-color: #f9f9f9;
+    }
+    .evenRow {
+      background-color: #e9e9e9;
+    }
+  </style>
+</head>
+<body>
+  <div id="output"></div>
+  <button onclick="readAll()">Read All Storages</button>
+  <button onclick="clearAll()">Clear All Storages</button>
+  <hr />
+  <form action="#" method="post" enctype="multipart/form-data" id="addForm">
+    <fieldset>
+      <legend>Add new item:</legend>
+      <label for="storageType">Select Type:</label>
+      <select id="storageType" onchange="toggleInputFields()">
+        <option value="none">None</option>
+        <option value="cookie">Cookie</option>
+        <option value="sessionStorage">Session Storage</option>
+        <option value="localStorage">Local Storage</option>
+      </select>
+      <div id="dynamicFieldContainer">
+        <label for="itemKey">Key:</label>
+        <input type="text" id="itemKey" required />
+        <label for="itemVal">Value:</label>
+        <input type="text" id="itemVal" required />
+      </div>
+      <div id="extraFields">
+        <label for="sessionOnly">Session Only:</label>
+        <input type="checkbox" id="sessionOnly" />
+      </div>
+      <button type="submit" id="btnSave" disabled>Save Item</button>
+    </fieldset>
+  </form>
+  <script>
+    function toggleInputFields() {
+      var selectElement = document.getElementById("storageType"),
+        extraFieldsDiv = document.getElementById("extraFields"),
+        dynamicFieldContainer = document.getElementById("dynamicFieldContainer"),
+        btnSave = document.getElementById("btnSave");
+
+      if (selectElement.value === "none") {
+        dynamicFieldContainer.style.display = "none";
+        extraFieldsDiv.style.display = "none";
+        btnSave.disabled = true;
+      } else {
+        dynamicFieldContainer.style.display = "block";
+        btnSave.disabled = false;
+        if (selectElement.value === "cookie") {
+          extraFieldsDiv.style.display = "block";
+        } else {
+          extraFieldsDiv.style.display = "none";
+        }
+      }
+    }
+
+    function readAll() {
+      let output = '<table><tr class="headerRow"><th>Type</th><th>Key</th><th>Value</th><th>Session Only</th></tr>';
+
+      // Cookies
+      const cookies = document.cookie.split('; ');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        if (cookie == '') {
+          continue;
+        }
+        const [key, value] = cookie.split('=');
+        const isSessionOnly = key.endsWith('_sess');
+        const cleanKey = isSessionOnly ? key.slice(0, -5) : key; // Remove the '_sess' suffix
+        const rowClass = i % 2 === 0 ? 'evenRow' : 'oddRow';
+        output += `<tr class="${rowClass}"><td>Cookie</td><td>${cleanKey}</td><td>${value}</td><td>${isSessionOnly ? 'Yes' : ''}</td></tr>`;
+      }
+
+      // Session Storage
+      for (let i = 0; i < sessionStorage.length; i++) {
+        const key = sessionStorage.key(i);
+        const value = sessionStorage.getItem(key);
+        const rowClass = (i + cookies.length) % 2 === 0 ? 'evenRow' : 'oddRow';
+        output += `<tr class="${rowClass}"><td>Session Storage</td><td>${key}</td><td>${value}</td><td></td></tr>`;
+      }
+
+      // Local Storage
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        const value = localStorage.getItem(key);
+        const rowClass = (i + cookies.length + sessionStorage.length) % 2 === 0 ? 'evenRow' : 'oddRow';
+        output += `<tr class="${rowClass}"><td>Local Storage</td><td>${key}</td><td>${value}</td><td></td></tr>`;
+      }
+
+      output += '</table>';
+      document.getElementById('output').innerHTML = output;
+    }
+
+    function clearAll() {
+      // Clear all cookies
+      const cookies = document.cookie.split(';');
+      for (const cookie of cookies) {
+        const [key] = cookie.split('=');
+        document.cookie = `${key}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+      }
+      // Clear session storage and local storage
+      sessionStorage.clear();
+      localStorage.clear();
+      // Update the display
+      readAll();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      readAll(); // Call readAll on page load to display all storage
+      toggleInputFields(); // Initialize fields based on the current selection
+      document.forms['addForm'].onsubmit = event => {
+        event.preventDefault();
+        const storageType = document.getElementById("storageType").value;
+        const itemKey = document.getElementById("itemKey").value;
+        const itemVal = document.getElementById("itemVal").value;
+        const sessionOnlyCheckbox = document.getElementById("sessionOnly");
+
+        if (storageType === 'cookie') {
+          const isSessionOnly = sessionOnlyCheckbox.checked;
+          const cookieKey = isSessionOnly ? `${itemKey}_sess` : itemKey;
+          document.cookie = `${encodeURIComponent(cookieKey)}=${encodeURIComponent(itemVal)}${isSessionOnly ? '' : '; Max-Age=360000000'}`;
+        } else if (window[storageType]) {
+          window[storageType].setItem(itemKey, itemVal);
+        }
+        readAll();
+      };
+    });
+  </script>
+</body>
+</html>
