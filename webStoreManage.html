@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Read Cookies, SessionStorage and LocalStorage</title>
   <style>
     button {
@@ -82,6 +83,12 @@
       <button type="submit" id="btnSave" disabled>Save Item</button>
     </fieldset>
   </form>
+  <div>
+    1. cookie是sessionOnly类型的会在切换登录或者重启app消失 <br/>
+    2. 普通cookie会在切换登录消失，重启app保留<br/>
+    3. sessionStorage会在网页关闭后消失，重新打开没有，切换登录也没有，重启app也没有<br/>
+    4. localStorage，会在切换登录消失，重启app保留<br/>
+  </div>
   <script>
     function toggleInputFields() {
       var selectElement = document.getElementById("storageType"),
