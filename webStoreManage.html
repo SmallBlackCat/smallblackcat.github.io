@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
       margin-top: 1em;
       display: block;
     }
+
     #extraFields {
       margin-bottom: 1rem;
       background-color: #f2f2f2;
@@ -16,16 +18,20 @@
       border-radius: 5px;
       display: none;
     }
+
     #extraFields label {
       margin-top: 10px;
     }
+
     #extraFields input,
     #extraFields select {
       margin-bottom: 10px;
     }
+
     #dynamicFieldContainer {
       display: none;
     }
+
     #output {
       white-space: pre-wrap;
       background-color: #eaeaea;
@@ -33,28 +39,38 @@
       border-radius: 5px;
       margin-bottom: 1em;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
     }
-    table, th, td {
+
+    table,
+    th,
+    td {
       border: 1px solid black;
     }
-    th, td {
+
+    th,
+    td {
       padding: 5px;
       text-align: left;
     }
+
     .headerRow {
       background-color: #f0bd57;
     }
+
     .oddRow {
       background-color: #f9f9f9;
     }
+
     .evenRow {
       background-color: #e9e9e9;
     }
   </style>
 </head>
+
 <body>
   <div id="output"></div>
   <button onclick="readAll()">Read All Storages</button>
@@ -73,7 +89,7 @@
       <div id="dynamicFieldContainer">
         <label for="itemKey">Key:</label>
         <input type="text" id="itemKey" required />
-        <br/>
+        <br />
         <label for="itemVal">Value:</label>
         <input type="text" id="itemVal" required />
       </div>
@@ -84,14 +100,8 @@
       <button type="submit" id="btnSave" disabled>Save Item</button>
     </fieldset>
   </form>
-  <div>
-    <br/>
-    <br/>
-    正常表现如下：<br/>
-    1. cookie是sessionOnly类型的再次打开网页保留，会在切换登录或者重启app消失 <br/>
-    2. 普通cookie再次打开网页保留，会在切换登录消失，重启app保留<br/>
-    3. sessionStorage会在网页关闭后消失，再次打开网页没有，切换登录也没有，重启app也没有<br/>
-    4. localStorage再次打开网页保留，会在切换登录消失，重启app保留<br/>
+  <div id="notes">
+
   </div>
   <script>
     function toggleInputFields() {
@@ -185,7 +195,28 @@
         }
         readAll();
       };
+      addNotes();
     });
+
+
+    function addNotes() {
+      //   正常表现如下：<br/>
+      // 1. cookie是sessionOnly类型的再次打开网页保留，会在切换登录或者重启app消失 <br/>
+      // 2. 普通cookie再次打开网页保留，会在切换登录消失，重启app保留<br/>
+      // 3. sessionStorage会在网页关闭后消失，再次打开网页没有，切换登录也没有，重启app也没有<br/>
+      // 4. localStorage再次打开网页保留，会在切换登录消失，重启app保留<br/>
+      let output = '<br/><br/>正常表现如下：<br/>'
+      output += '<table><tr class="headerRow"><th>类型</th><th>再次打开网页</th><th>切换登录后打开网页</th><th>重启app打开网页</th></tr>';
+      output += `<tr class="evenRow"><td>普通Cookie</td><td>存在</td><td>不存在</td><td>存在</td></tr>`;
+      output += `<tr class="oddRow"><td>sessionOnly类型的Cookie</td><td>存在</td><td>不存在</td><td>不存在</td></tr>`;
+      output += `<tr class="evenRow"><td>sessionStorage</td><td>不存在</td><td>不存在</td><td>不存在</td></tr>`;
+      output += `<tr class="oddRow"><td>localStorage</td><td>存在</td><td>不存在</td><td>存在</td></tr>`;
+
+      output += '</table>';
+      document.getElementById('notes').innerHTML = output;
+    }
+
   </script>
 </body>
+
 </html>
