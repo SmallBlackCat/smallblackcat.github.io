@@ -206,11 +206,11 @@
       // 3. sessionStorage会在网页关闭后消失，再次打开网页没有，切换登录也没有，重启app也没有<br/>
       // 4. localStorage再次打开网页保留，会在切换登录消失，重启app保留<br/>
       let output = '<br/><br/>正常表现如下：<br/>'
-      output += '<table><tr class="headerRow"><th>类型</th><th>再次打开网页</th><th>切换登录后打开网页</th><th>重启app打开网页</th></tr>';
-      output += `<tr class="evenRow"><td>普通Cookie</td><td>存在</td><td>不存在</td><td>存在</td></tr>`;
-      output += `<tr class="oddRow"><td>sessionOnly类型的Cookie</td><td>存在</td><td>不存在</td><td>不存在</td></tr>`;
-      output += `<tr class="evenRow"><td>sessionStorage</td><td>不存在</td><td>不存在</td><td>不存在</td></tr>`;
-      output += `<tr class="oddRow"><td>localStorage</td><td>存在</td><td>不存在</td><td>存在</td></tr>`;
+      output += '<table><tr class="headerRow"><th>类型</th><th>再次打开网页</th><th>切换登录后打开网页</th><th>重启app打开网页</th><th>添加其他企业后打开网页</th></tr>';
+      output += `<tr class="evenRow"><td>普通Cookie</td><td>存在</td><td>不存在</td><td>存在</td><td>不存在</td></tr>`;
+      output += `<tr class="oddRow"><td>sessionOnly类型的Cookie</td><td>存在</td><td>不存在</td><td>不存在</td><td>不存在</td></tr>`;
+      output += `<tr class="evenRow"><td>sessionStorage</td><td>不存在</td><td>不存在</td><td>不存在</td><td>不存在</td></tr>`;
+      output += `<tr class="oddRow"><td>localStorage</td><td>存在</td><td>不存在</td><td>存在</td><td>不存在</td></tr>`;
 
       output += '</table>';
       document.getElementById('notes').innerHTML = output;
