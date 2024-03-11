@@ -365,9 +365,8 @@
             }
 
             function changeColor() {
-              var colorCode = document.getElementById('colorInput').value;
                 wx.invoke('changeNaviColor', {
-                    "navbar_color": colorCode, // 导航栏和状态栏背景颜色
+                    "navbar_color": "#FF00FF", // 导航栏和状态栏背景颜色
                     "status_type": 2, //1 颜色显示为白色，2 颜色显示为黑色 (状态信号栏文字和navi标题字体颜色)
                 }, function(res){
                     if (res.err_msg != "changeNaviColor:ok") {
@@ -381,8 +380,9 @@
 
 
             function changeColor2() {
+                var colorCode = document.getElementById('colorInput').value;
                 wx.invoke('changeNaviColor', {
-                    "navbar_color": "#FF00FF", // 导航栏和状态栏背景颜色
+                    "navbar_color": colorCode, // 导航栏和状态栏背景颜色
                     "status_type": 1, //1 颜色显示为白色，2 颜色显示为黑色 (状态信号栏文字和navi标题字体颜色)
                 }, function(res){
                     if (res.err_msg != "changeNaviColor:ok") {
