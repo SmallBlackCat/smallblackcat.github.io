@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protocol Switcher</title>
+<script>
+function goToHTTPS() {
+    // 获取当前URL并替换协议为https
+    var httpsURL = window.location.href.replace(/^http:/, 'https:');
+    window.location.href = httpsURL; // 导航到新的HTTPS链接
+}
+
+function goToHTTP() {
+    // 获取当前URL并替换协议为http
+    var httpURL = window.location.href.replace(/^https:/, 'http:');
+    window.location.href = httpURL; // 导航到新的HTTP链接
+}
+</script>
+</head>
+<body>
+
+<h1 id="protocolTitle">Current Protocol: <strong id="protocolType">Loading...</strong></h1>
+
+<button onclick="goToHTTPS()">Switch to HTTPS</button>
+<button onclick="goToHTTP()">Switch to HTTP</button>
+
+<script>
+// 显示当前的协议
+function displayCurrentProtocol() {
+    var protocol = window.location.protocol;
+    var protocolTypeElement = document.getElementById('protocolType');
+    protocolTypeElement.textContent = protocol === 'https:' ? 'HTTPS' : 'HTTP';
+}
+
+// 当页面加载完毕时执行
+window.onload = displayCurrentProtocol;
+</script>
+
+</body>
+</html>
