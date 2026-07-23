@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="《伤寒论·金匮要略》App 技术支持：使用帮助、购买恢复、内容纠错、数据说明与联系方式。">
+  <meta name="color-scheme" content="light dark">
+  <title>技术支持｜伤寒论·金匮要略</title>
+  <style>
+    :root {
+      --bg: #f7f4ed;
+      --card: rgba(255, 255, 255, 0.84);
+      --text: #2b2924;
+      --muted: #706b61;
+      --line: #ded8cc;
+      --accent: #7b2f2f;
+      --accent-soft: #f1e4df;
+      --ok: #416a52;
+      --shadow: 0 12px 32px rgba(49, 39, 27, 0.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #171612;
+        --card: rgba(35, 33, 28, 0.94);
+        --text: #f1ede3;
+        --muted: #b9b2a6;
+        --line: #464139;
+        --accent: #df9b8f;
+        --accent-soft: #3a2825;
+        --ok: #9ec4aa;
+        --shadow: none;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 90% 0%, rgba(123,47,47,.08), transparent 32rem),
+        var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "PingFang TC",
+                   "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    .page {
+      width: min(980px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 12px;
+    }
+    .lang-switch {
+      display: inline-flex;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--card);
+    }
+    .lang-switch button {
+      appearance: none;
+      border: 0;
+      border-radius: 9px;
+      background: transparent;
+      color: var(--muted);
+      padding: 7px 12px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .lang-switch button[aria-pressed="true"] {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 650;
+    }
+    header, main {
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    header {
+      border-radius: 24px 24px 0 0;
+      padding: clamp(28px, 6vw, 52px);
+      border-bottom: 0;
+    }
+    main {
+      border-radius: 0 0 24px 24px;
+      padding: clamp(24px, 6vw, 52px);
+    }
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(32px, 7vw, 52px);
+      line-height: 1.2;
+      letter-spacing: -.03em;
+    }
+    .lead {
+      max-width: 720px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 650;
+    }
+    .button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+    section { margin-top: 42px; }
+    section:first-child { margin-top: 0; }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 23px;
+      line-height: 1.35;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+    }
+    p { margin: 9px 0; }
+    ul, ol { margin: 10px 0; padding-left: 1.4em; }
+    li + li { margin-top: 7px; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .card {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,.24);
+    }
+    .card p { color: var(--muted); }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--ok);
+      font-weight: 700;
+    }
+    .status::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    details {
+      border-top: 1px solid var(--line);
+      padding: 16px 0;
+    }
+    details:last-child { border-bottom: 1px solid var(--line); }
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      list-style: none;
+      padding-right: 28px;
+      position: relative;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: "+";
+      position: absolute;
+      right: 2px;
+      top: -2px;
+      color: var(--accent);
+      font-size: 22px;
+      font-weight: 500;
+    }
+    details[open] summary::after { content: "−"; }
+    details > div {
+      padding: 10px 0 0;
+      color: var(--muted);
+    }
+    .contact {
+      padding: 22px;
+      border-radius: 16px;
+      background: var(--accent-soft);
+    }
+    .warning {
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 14px 14px 0;
+      background: var(--accent-soft);
+    }
+    footer {
+      padding: 24px 8px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    [data-lang] { display: none; }
+    [data-lang].active { display: block; }
+    @media (max-width: 680px) {
+      .cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .page { width: min(100% - 20px, 980px); padding-top: 14px; }
+      header { border-radius: 18px 18px 0 0; }
+      main { border-radius: 0 0 18px 18px; }
+      .actions { flex-direction: column; }
+      .button { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div class="lang-switch" role="group" aria-label="语言切换">
+        <button type="button" data-set-lang="zh-CN" aria-pressed="true">简体</button>
+        <button type="button" data-set-lang="zh-TW" aria-pressed="false">繁體</button>
+      </div>
+    </div>
+
+    <article data-lang="zh-CN" class="active">
+      <header>
+        <p class="eyebrow">伤寒论·金匮要略</p>
+        <h1>技术支持</h1>
+        <p class="lead">这里提供使用帮助、Pro 购买恢复、内容纠错、数据说明与问题反馈渠道。我们重视每一条关于经典文本、版本来源和产品体验的反馈。</p>
+        <div class="actions">
+          <a class="button primary" href="mailto:fish2next@gmail.com?subject=%E3%80%8A%E4%BC%A4%E5%AF%92%E8%AE%BA%C2%B7%E9%87%91%E5%8C%AE%E8%A6%81%E7%95%A5%E3%80%8B%E9%97%AE%E9%A2%98%E5%8F%8D%E9%A6%88">发送邮件</a>
+          <a class="button" href="#faq">查看常见问题</a>
+          <a class="button" href="PrivacyPolicy.html">隐私政策</a>
+        </div>
+      </header>
+
+      <main>
+        <section>
+          <span class="status">支持页面正常</span>
+          <h2>联系我们</h2>
+          <div class="contact">
+            <p><strong>开发者：</strong>fish2next</p>
+            <p><strong>支持邮箱：</strong><a href="mailto:fish2next@gmail.com?subject=%E3%80%8A%E4%BC%A4%E5%AF%92%E8%AE%BA%C2%B7%E9%87%91%E5%8C%AE%E8%A6%81%E7%95%A5%E3%80%8B%E9%97%AE%E9%A2%98%E5%8F%8D%E9%A6%88">fish2next@gmail.com</a></p>
+            <p>我们会阅读每一封反馈，并在条件允许时尽快回复。请勿通过邮件发送身份证件、完整病历、处方、银行卡信息或其他不必要的敏感信息。</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>为了更快定位问题</h2>
+          <p>发送反馈时，建议同时提供以下信息：</p>
+          <div class="cards">
+            <div class="card">
+              <h3>设备与版本</h3>
+              <p>iPhone 或 iPad 型号、iOS/iPadOS 版本、App 版本与当前语言。</p>
+            </div>
+            <div class="card">
+              <h3>问题经过</h3>
+              <p>您从哪个页面进入、执行了哪些操作、预期结果与实际结果。</p>
+            </div>
+            <div class="card">
+              <h3>截图或录屏</h3>
+              <p>请先遮挡姓名、通知、病历或其他隐私信息，再附上必要的截图或录屏。</p>
+            </div>
+            <div class="card">
+              <h3>内容纠错依据</h3>
+              <p>请注明书名、篇章、条文号、具体文字、底本或参考资料及建议修改内容。</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq">
+          <h2>常见问题</h2>
+
+          <details>
+            <summary>本 App 可以用于看病或开方吗？</summary>
+            <div>
+              <p>不可以。本 App 是经典阅读、学习和研究工具。古籍原文、方剂、方证、注释、版本比较及其他内容不构成医疗建议、诊断结论、处方或治疗方案，也不能替代执业医师的专业判断。</p>
+              <p>如有具体健康、用药或紧急问题，请咨询合资格医疗专业人员或当地急救机构。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>收藏、笔记和学习记录会上传吗？</summary>
+            <div>
+              <p>当前版本默认保存在您的设备上，不上传至开发者服务器。本 App 不要求注册账号，也不提供开发者账号体系下的云端资料库。</p>
+              <p>若设备开启了 iCloud 备份，iOS 可能按照系统设置备份部分 App 数据；该过程由 Apple 管理。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>卸载或更换设备后，笔记为什么不见了？</summary>
+            <div>
+              <p>收藏、笔记、搜索历史和学习记录主要保存在本机。卸载 App、清除设备或更换设备时，若系统备份没有包含或恢复相应数据，内容可能无法找回。</p>
+              <p>在确认重要学习资料已妥善备份前，请谨慎卸载 App。应用内如提供导出功能，建议定期导出重要笔记。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>已购买 Pro，但功能没有解锁怎么办？</summary>
+            <div>
+              <ol>
+                <li>确认设备登录的是购买时使用的同一个 Apple ID；</li>
+                <li>确认网络连接正常，并重新打开 App；</li>
+                <li>进入 App 的 Pro 或购买页面，点击“恢复购买”；</li>
+                <li>仍未恢复时，请附上 App 版本、系统版本和问题截图联系我们。</li>
+              </ol>
+              <p>请勿通过邮件发送 Apple ID 密码、银行卡号或完整支付凭证。我们无法查看或修改您的 Apple 账户密码和付款方式。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>如何申请退款或管理购买？</summary>
+            <div>
+              <p>App 内购买由 Apple 处理。退款资格、退款进度、付款方式和购买记录应通过 Apple 的购买记录、订阅管理或“报告问题”渠道查询。开发者无法直接批准退款，也无法修改 Apple 账户中的交易状态。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>节气提醒没有出现怎么办？</summary>
+            <div>
+              <ol>
+                <li>确认已在 App 内开启相应提醒；</li>
+                <li>前往“系统设置 → 通知 → 伤寒论·金匮要略”，允许通知；</li>
+                <li>检查专注模式、通知摘要和设备时间设置；</li>
+                <li>重新关闭并开启一次提醒。</li>
+              </ol>
+              <p>当前提醒主要由设备本地调度。系统可能根据通知设置、专注模式或设备状态调整显示方式。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>搜索不到条文、方剂或术语怎么办？</summary>
+            <div>
+              <p>可以尝试简体与繁体写法、异体字、方剂全称与简称、药名别称，或减少搜索词。对于多条件搜索，可先使用最具辨识度的词，再从结果中筛选。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>如何切换简体、繁体、字体或阅读主题？</summary>
+            <div>
+              <p>请进入 App 的“设置”或阅读页面中的显示设置，调整简繁、主题、字体、字号和行距。具体入口可能随版本迭代调整。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>发现原文、方剂或版本资料有错误，如何反馈？</summary>
+            <div>
+              <p>请发送邮件并尽量注明：书名、篇章、条文号、当前内容、建议内容、参考底本或出版信息。若是方剂资料，请同时注明方名、组成、剂量、煎服法或出处中存在的问题。</p>
+              <p>不同底本、注家及现代整理本之间可能存在文字差异。我们会优先核对来源，不会仅凭单一截图直接替换原文。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>如何提出功能建议？</summary>
+            <div>
+              <p>欢迎说明您的使用场景、目前遇到的困难、希望增加的功能以及理想操作流程。相比只写“增加某功能”，具体场景更有助于判断优先级和设计方案。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>App 闪退、卡顿或页面显示异常怎么办？</summary>
+            <div>
+              <ol>
+                <li>记录出现问题的页面和操作步骤；</li>
+                <li>彻底关闭 App 后重新打开；</li>
+                <li>确认已更新到 App Store 提供的最新版本；</li>
+                <li>若问题持续，请联系我们，并附设备型号、系统版本、App 版本和截图或录屏。</li>
+              </ol>
+              <p>如本机有尚未备份的重要笔记，不建议把“卸载并重新安装”作为第一步。</p>
+            </div>
+          </details>
+        </section>
+
+        <section>
+          <h2>内容与版权反馈</h2>
+          <p>我们尊重经典文献、现代整理成果、注家著作及其他内容的知识产权。若您认为 App 中的内容存在来源标注不足、版权问题、文字错漏或不当使用，请通过支持邮箱提供具体页面、内容位置、权利依据和可联系信息，我们会认真核查并按实际情况处理。</p>
+        </section>
+
+        <section>
+          <h2>兼容性与服务范围</h2>
+          <ul>
+            <li>具体支持的 iPhone、iPad 与系统版本，以 App Store“兼容性”信息为准；</li>
+            <li>部分功能可能需要 Pro 权益、通知权限或网络连接；</li>
+            <li>经典阅读和个人学习功能的实际范围，以当前安装版本为准；</li>
+            <li>系统测试版、越狱设备或存储空间严重不足等环境，可能影响稳定性。</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>医疗免责声明</h2>
+          <div class="warning">
+            <p><strong>重要：</strong>本 App 仅供经典阅读、学习、研究和文化交流。任何方剂、剂量、煎服方法、证候描述和注释都不应被直接视为针对个人的医疗建议。</p>
+            <p>请勿依据本 App 自行诊断、开方、购药、停药、换药或延误就医。孕妇、儿童、老年人、慢性病患者及正在使用其他药物的人群，在采取任何医疗行为前尤其应咨询合资格医疗专业人员。</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>相关页面</h2>
+          <p><a href="PrivacyPolicy.html">查看《伤寒论·金匮要略》隐私政策</a></p>
+          <p>页面更新日期：2026年7月23日</p>
+        </section>
+      </main>
+    </article>
+
+    <article data-lang="zh-TW">
+      <header>
+        <p class="eyebrow">傷寒論·金匱要略</p>
+        <h1>技術支援</h1>
+        <p class="lead">這裡提供使用協助、Pro 購買回復、內容勘誤、資料說明與問題回報管道。我們重視每一則關於經典文本、版本來源和產品體驗的意見。</p>
+        <div class="actions">
+          <a class="button primary" href="mailto:fish2next@gmail.com?subject=%E3%80%8A%E5%82%B7%E5%AF%92%E8%AB%96%C2%B7%E9%87%91%E5%8C%B1%E8%A6%81%E7%95%A5%E3%80%8B%E5%95%8F%E9%A1%8C%E5%9B%9E%E5%A0%B1">傳送郵件</a>
+          <a class="button" href="#faq-tw">查看常見問題</a>
+          <a class="button" href="PrivacyPolicy.html">隱私權政策</a>
+        </div>
+      </header>
+
+      <main>
+        <section>
+          <span class="status">支援頁面正常</span>
+          <h2>聯絡我們</h2>
+          <div class="contact">
+            <p><strong>開發者：</strong>fish2next</p>
+            <p><strong>支援信箱：</strong><a href="mailto:fish2next@gmail.com?subject=%E3%80%8A%E5%82%B7%E5%AF%92%E8%AB%96%C2%B7%E9%87%91%E5%8C%B1%E8%A6%81%E7%95%A5%E3%80%8B%E5%95%8F%E9%A1%8C%E5%9B%9E%E5%A0%B1">fish2next@gmail.com</a></p>
+            <p>我們會閱讀每一封回饋，並在條件允許時儘快回覆。請勿透過電子郵件傳送身分證件、完整病歷、處方、銀行卡資訊或其他不必要的敏感資訊。</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>為了更快定位問題</h2>
+          <p>傳送回饋時，建議同時提供以下資訊：</p>
+          <div class="cards">
+            <div class="card">
+              <h3>裝置與版本</h3>
+              <p>iPhone 或 iPad 型號、iOS/iPadOS 版本、App 版本與目前語言。</p>
+            </div>
+            <div class="card">
+              <h3>問題經過</h3>
+              <p>您從哪個頁面進入、執行了哪些操作、預期結果與實際結果。</p>
+            </div>
+            <div class="card">
+              <h3>截圖或螢幕錄影</h3>
+              <p>請先遮蔽姓名、通知、病歷或其他隱私資訊，再附上必要的截圖或錄影。</p>
+            </div>
+            <div class="card">
+              <h3>內容勘誤依據</h3>
+              <p>請註明書名、篇章、條文號、具體文字、底本或參考資料及建議修改內容。</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq-tw">
+          <h2>常見問題</h2>
+
+          <details>
+            <summary>本 App 可以用於看病或開方嗎？</summary>
+            <div>
+              <p>不可以。本 App 是經典閱讀、學習和研究工具。古籍原文、方劑、方證、註釋、版本比較及其他內容不構成醫療建議、診斷結論、處方或治療方案，也不能取代執業醫師的專業判斷。</p>
+              <p>如有具體健康、用藥或緊急問題，請諮詢合資格醫療專業人員或當地急救機構。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>收藏、筆記和學習記錄會上傳嗎？</summary>
+            <div>
+              <p>目前版本預設儲存在您的裝置上，不上傳至開發者伺服器。本 App 不要求註冊帳號，也不提供開發者帳號系統下的雲端資料庫。</p>
+              <p>若裝置開啟了 iCloud 備份，iOS 可能依照系統設定備份部分 App 資料；該過程由 Apple 管理。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>移除或更換裝置後，筆記為何不見了？</summary>
+            <div>
+              <p>收藏、筆記、搜尋記錄和學習記錄主要儲存在本機。移除 App、清除裝置或更換裝置時，若系統備份沒有包含或回復相應資料，內容可能無法找回。</p>
+              <p>在確認重要學習資料已妥善備份前，請謹慎移除 App。應用程式內如提供匯出功能，建議定期匯出重要筆記。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>已購買 Pro，但功能沒有解鎖怎麼辦？</summary>
+            <div>
+              <ol>
+                <li>確認裝置登入的是購買時使用的同一個 Apple ID；</li>
+                <li>確認網路連線正常，並重新開啟 App；</li>
+                <li>進入 App 的 Pro 或購買頁面，點選「回復購買」；</li>
+                <li>仍未回復時，請附上 App 版本、系統版本和問題截圖聯絡我們。</li>
+              </ol>
+              <p>請勿透過電子郵件傳送 Apple ID 密碼、銀行卡號或完整付款憑證。我們無法查看或修改您的 Apple 帳戶密碼和付款方式。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>如何申請退款或管理購買？</summary>
+            <div>
+              <p>App 內購買由 Apple 處理。退款資格、退款進度、付款方式和購買記錄應透過 Apple 的購買記錄、訂閱管理或「回報問題」管道查詢。開發者無法直接核准退款，也無法修改 Apple 帳戶中的交易狀態。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>節氣提醒沒有出現怎麼辦？</summary>
+            <div>
+              <ol>
+                <li>確認已在 App 內開啟相應提醒；</li>
+                <li>前往「系統設定 → 通知 → 傷寒論·金匱要略」，允許通知；</li>
+                <li>檢查專注模式、通知摘要和裝置時間設定；</li>
+                <li>重新關閉並開啟一次提醒。</li>
+              </ol>
+              <p>目前提醒主要由裝置本機排程。系統可能依通知設定、專注模式或裝置狀態調整顯示方式。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>搜尋不到條文、方劑或術語怎麼辦？</summary>
+            <div>
+              <p>可以嘗試簡體與繁體寫法、異體字、方劑全稱與簡稱、藥名別稱，或減少搜尋詞。多條件搜尋時，可先使用最具辨識度的詞，再從結果中篩選。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>如何切換簡體、繁體、字體或閱讀主題？</summary>
+            <div>
+              <p>請進入 App 的「設定」或閱讀頁面中的顯示設定，調整簡繁、主題、字體、字級和行距。具體入口可能隨版本更新調整。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>發現原文、方劑或版本資料有錯誤，如何回報？</summary>
+            <div>
+              <p>請傳送電子郵件並儘量註明：書名、篇章、條文號、目前內容、建議內容、參考底本或出版資訊。若是方劑資料，請同時註明方名、組成、劑量、煎服法或出處中存在的問題。</p>
+              <p>不同底本、注家及現代整理本之間可能存在文字差異。我們會優先核對來源，不會僅憑單一截圖直接替換原文。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>如何提出功能建議？</summary>
+            <div>
+              <p>歡迎說明您的使用情境、目前遇到的困難、希望增加的功能以及理想操作流程。相比只寫「增加某功能」，具體情境更有助於判斷優先順序和設計方案。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>App 閃退、卡頓或頁面顯示異常怎麼辦？</summary>
+            <div>
+              <ol>
+                <li>記錄出現問題的頁面和操作步驟；</li>
+                <li>完全關閉 App 後重新開啟；</li>
+                <li>確認已更新至 App Store 提供的最新版本；</li>
+                <li>若問題持續，請聯絡我們並附裝置型號、系統版本、App 版本和截圖或螢幕錄影。</li>
+              </ol>
+              <p>如本機有尚未備份的重要筆記，不建議把「移除並重新安裝」作為第一步。</p>
+            </div>
+          </details>
+        </section>
+
+        <section>
+          <h2>內容與著作權回饋</h2>
+          <p>我們尊重經典文獻、現代整理成果、注家著作及其他內容的智慧財產權。若您認為 App 中的內容存在來源標示不足、著作權問題、文字錯漏或不當使用，請透過支援信箱提供具體頁面、內容位置、權利依據和可聯絡資訊，我們會認真核查並依實際情況處理。</p>
+        </section>
+
+        <section>
+          <h2>相容性與服務範圍</h2>
+          <ul>
+            <li>具體支援的 iPhone、iPad 與系統版本，以 App Store「相容性」資訊為準；</li>
+            <li>部分功能可能需要 Pro 權益、通知權限或網路連線；</li>
+            <li>經典閱讀和個人學習功能的實際範圍，以目前安裝版本為準；</li>
+            <li>系統測試版、越獄裝置或儲存空間嚴重不足等環境，可能影響穩定性。</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>醫療免責聲明</h2>
+          <div class="warning">
+            <p><strong>重要：</strong>本 App 僅供經典閱讀、學習、研究和文化交流。任何方劑、劑量、煎服方法、證候描述和註釋都不應被直接視為針對個人的醫療建議。</p>
+            <p>請勿依據本 App 自行診斷、開方、購藥、停藥、換藥或延誤就醫。孕婦、兒童、高齡者、慢性病患者及正在使用其他藥物的人，在採取任何醫療行為前尤其應諮詢合資格醫療專業人員。</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>相關頁面</h2>
+          <p><a href="PrivacyPolicy.html">查看《傷寒論·金匱要略》隱私權政策</a></p>
+          <p>頁面更新日期：2026年7月23日</p>
+        </section>
+      </main>
+    </article>
+
+    <footer>© 2026 fish2next · 伤寒论·金匮要略 / 傷寒論·金匱要略</footer>
+  </div>
+
+  <script>
+    (function () {
+      const articles = document.querySelectorAll("[data-lang]");
+      const buttons = document.querySelectorAll("[data-set-lang]");
+      const saved = localStorage.getItem("shanghan-page-language");
+      const browserTraditional = /zh-(TW|HK|MO)/i.test(navigator.language || "");
+      const initial = saved || (browserTraditional ? "zh-TW" : "zh-CN");
+
+      function setLanguage(lang) {
+        articles.forEach(el => el.classList.toggle("active", el.dataset.lang === lang));
+        buttons.forEach(btn => btn.setAttribute("aria-pressed", String(btn.dataset.setLang === lang)));
+        document.documentElement.lang = lang;
+        document.title = lang === "zh-TW"
+          ? "技術支援｜傷寒論·金匱要略"
+          : "技术支持｜伤寒论·金匮要略";
+        localStorage.setItem("shanghan-page-language", lang);
+      }
+
+      buttons.forEach(btn => btn.addEventListener("click", () => setLanguage(btn.dataset.setLang)));
+      setLanguage(initial);
+    })();
+  </script>
+</body>
+</html>
