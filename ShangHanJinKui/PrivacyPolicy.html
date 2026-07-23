@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="《伤寒论·金匮要略》App 隐私政策：说明本地数据、通知、内购、数据删除与联系方式。">
+  <meta name="color-scheme" content="light dark">
+  <title>隐私政策｜伤寒论·金匮要略</title>
+  <style>
+    :root {
+      --bg: #f7f4ed;
+      --card: rgba(255, 255, 255, 0.82);
+      --text: #2b2924;
+      --muted: #706b61;
+      --line: #ded8cc;
+      --accent: #7b2f2f;
+      --accent-soft: #f1e4df;
+      --shadow: 0 12px 32px rgba(49, 39, 27, 0.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #171612;
+        --card: rgba(35, 33, 28, 0.94);
+        --text: #f1ede3;
+        --muted: #b9b2a6;
+        --line: #464139;
+        --accent: #df9b8f;
+        --accent-soft: #3a2825;
+        --shadow: none;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(123,47,47,.08), transparent 30rem),
+        var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "PingFang TC",
+                   "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    .page {
+      width: min(920px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 12px;
+    }
+    .lang-switch {
+      display: inline-flex;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--card);
+    }
+    .lang-switch button {
+      appearance: none;
+      border: 0;
+      border-radius: 9px;
+      background: transparent;
+      color: var(--muted);
+      padding: 7px 12px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .lang-switch button[aria-pressed="true"] {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 650;
+    }
+    header, main {
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    header {
+      border-radius: 24px 24px 0 0;
+      padding: clamp(28px, 6vw, 52px);
+      border-bottom: 0;
+    }
+    main {
+      border-radius: 0 0 24px 24px;
+      padding: clamp(24px, 6vw, 52px);
+    }
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(32px, 7vw, 52px);
+      line-height: 1.2;
+      letter-spacing: -.03em;
+    }
+    .updated {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .summary {
+      margin: 28px 0 0;
+      padding: 18px 20px;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      background: var(--accent-soft);
+      font-weight: 600;
+    }
+    section { margin-top: 38px; }
+    section:first-child { margin-top: 0; }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+    h3 {
+      margin: 24px 0 8px;
+      font-size: 17px;
+    }
+    p { margin: 10px 0; }
+    ul { margin: 10px 0; padding-left: 1.35em; }
+    li + li { margin-top: 7px; }
+    .table-wrap {
+      overflow-x: auto;
+      margin: 16px 0;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+    table {
+      width: 100%;
+      min-width: 620px;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+    th, td {
+      padding: 13px 15px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+    }
+    th { background: var(--accent-soft); }
+    tr:last-child td { border-bottom: 0; }
+    .note {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--muted);
+    }
+    .contact {
+      padding: 20px;
+      border-radius: 16px;
+      background: var(--accent-soft);
+    }
+    footer {
+      padding: 24px 8px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    [data-lang] { display: none; }
+    [data-lang].active { display: block; }
+    @media (max-width: 560px) {
+      .page { width: min(100% - 20px, 920px); padding-top: 14px; }
+      header { border-radius: 18px 18px 0 0; }
+      main { border-radius: 0 0 18px 18px; }
+      .topbar { margin-right: 2px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div class="lang-switch" role="group" aria-label="语言切换">
+        <button type="button" data-set-lang="zh-CN" aria-pressed="true">简体</button>
+        <button type="button" data-set-lang="zh-TW" aria-pressed="false">繁體</button>
+      </div>
+    </div>
+
+    <article data-lang="zh-CN" class="active">
+      <header>
+        <p class="eyebrow">伤寒论·金匮要略</p>
+        <h1>隐私政策</h1>
+        <p class="updated">生效及更新日期：2026年7月23日</p>
+        <p class="summary">一句话说明：本 App 无需注册账号，不投放广告，不使用行为追踪；收藏、笔记、搜索历史与学习记录默认仅保存在您的设备上。</p>
+      </header>
+      <main>
+        <section>
+          <h2>1. 适用范围</h2>
+          <p>本隐私政策适用于“伤寒论·金匮要略”（以下简称“本 App”），说明开发者 fish2next（以下简称“我们”）在您使用本 App 时如何处理信息。</p>
+          <p>本 App 定位为《伤寒论》《金匮要略》及相关资料的阅读与学习工具，不提供在线问诊、疾病诊断、处方开具或治疗服务。</p>
+        </section>
+
+        <section>
+          <h2>2. 我们不收集的信息</h2>
+          <p>在当前版本中，本 App 不要求创建账号，也不会由开发者主动收集、存储或上传以下信息：</p>
+          <ul>
+            <li>姓名、手机号码、电子邮箱、证件号码等身份信息；</li>
+            <li>精确位置或大致位置；</li>
+            <li>通讯录、照片、相机、麦克风、健康数据或运动数据；</li>
+            <li>设备广告标识符、用于跨 App 追踪的标识符；</li>
+            <li>搜索内容、阅读记录、收藏、笔记或学习进度；</li>
+            <li>用于广告投放、用户画像或个性化营销的数据。</li>
+          </ul>
+          <p>本 App 不集成广告 SDK，不进行跨 App 或跨网站追踪。若未来功能或数据处理方式发生实质变化，我们将先更新本政策，并按适用规则取得必要授权。</p>
+        </section>
+
+        <section>
+          <h2>3. 保存在设备上的数据</h2>
+          <p>为了提供阅读和学习功能，本 App 会使用 iOS 提供的本地存储能力保存以下数据。这些数据默认不会上传至开发者服务器：</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>数据类型</th>
+                  <th>用途</th>
+                  <th>存储位置</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>收藏与个人笔记</td>
+                  <td>保存您标记的条文、方剂及个人学习内容</td>
+                  <td>您的设备</td>
+                </tr>
+                <tr>
+                  <td>搜索历史与阅读记录</td>
+                  <td>便于再次查找和继续阅读</td>
+                  <td>您的设备</td>
+                </tr>
+                <tr>
+                  <td>学习状态与学习进度</td>
+                  <td>展示个人学习档案及完成情况</td>
+                  <td>您的设备</td>
+                </tr>
+                <tr>
+                  <td>阅读偏好</td>
+                  <td>记住主题、字体、字号、行距、简繁及复制样式等设置</td>
+                  <td>您的设备</td>
+                </tr>
+                <tr>
+                  <td>Pro 权益状态</td>
+                  <td>识别已购买功能并支持恢复购买</td>
+                  <td>设备及 Apple 提供的购买服务</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">请注意：卸载 App、清除设备内容或更换设备，可能导致仅保存在本机且未被系统备份的数据丢失。请勿在个人笔记中保存不必要的敏感个人信息或患者隐私。</p>
+        </section>
+
+        <section>
+          <h2>4. 系统权限</h2>
+          <h3>通知权限</h3>
+          <p>当您主动开启节气提醒或其他学习提醒时，本 App 可能请求通知权限。相关提醒由 iOS 在设备本地调度；当前版本不使用远程推送服务，也不会将设备推送令牌发送给开发者服务器。</p>
+          <p>您可以随时在“系统设置 → 通知 → 伤寒论·金匮要略”中关闭或调整通知权限。拒绝通知权限不会影响经典阅读、搜索、收藏和笔记等核心功能。</p>
+
+          <h3>剪贴板与分享</h3>
+          <p>仅当您主动点击“复制”或“分享”时，本 App 才会按照您的操作将所选文字交给 iOS 剪贴板或系统分享面板。本 App 不会在后台读取您的剪贴板内容。</p>
+        </section>
+
+        <section>
+          <h2>5. App 内购买</h2>
+          <p>Pro 功能的购买、支付、退款和购买记录由 Apple 的 App Store 与 StoreKit 服务处理。我们不会接触或保存您的银行卡号、支付密码或完整付款信息。</p>
+          <p>为确认和恢复购买，App 可能向 Apple 请求当前 Apple ID 对应的交易或权益状态。该过程受 Apple 的相关条款与隐私政策约束。</p>
+        </section>
+
+        <section>
+          <h2>6. 第三方服务与外部链接</h2>
+          <p>本 App 当前不集成第三方广告、用户行为分析或社交追踪 SDK。</p>
+          <p>当您主动打开隐私政策、技术支持或其他外部资料链接时，内容会通过浏览器或相应第三方服务打开，其数据处理方式由该服务自己的隐私政策决定。</p>
+          <p>本页面托管于 GitHub Pages。访问本页面时，GitHub 可能出于安全目的记录访问者的 IP 地址及基本访问日志。开发者未在本页面额外嵌入广告或第三方统计脚本。您可查阅 <a href="https://docs.github.com/zh/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub 隐私声明</a>。</p>
+        </section>
+
+        <section>
+          <h2>7. 系统备份与数据同步</h2>
+          <p>本 App 不建立开发者账号体系，也不主动将您的学习数据上传至我们的服务器。若您在设备中启用了 iCloud 备份或其他 Apple 系统备份功能，iOS 可能依据您的系统设置备份部分 App 数据。此类备份由 Apple 管理，您可在 Apple ID 与 iCloud 设置中查看和管理。</p>
+          <p>除非 App 内明确显示已提供相应能力，否则请勿将系统备份视为实时跨设备同步功能。</p>
+        </section>
+
+        <section>
+          <h2>8. 数据保留、删除与撤回授权</h2>
+          <ul>
+            <li>您可以在 App 提供相应入口时，逐项删除搜索历史、收藏、笔记或学习记录；</li>
+            <li>删除本 App 通常会移除设备上的本地 App 数据；</li>
+            <li>系统备份中的副本可能按照 Apple 的备份策略继续保留，您可在 iCloud 设置中管理；</li>
+            <li>通知等系统权限可随时在 iOS 设置中撤回；</li>
+            <li>由于我们不保存您的账号或学习数据，因此通常不存在需要向开发者申请删除的服务器端个人数据。</li>
+          </ul>
+          <p>如您曾通过电子邮件主动联系我们，您可以通过下方邮箱申请删除该邮件沟通中由我们保存的个人信息，但法律要求或处理争议所必需的信息除外。</p>
+        </section>
+
+        <section>
+          <h2>9. 儿童隐私</h2>
+          <p>本 App 不以儿童为专门目标用户，也不会主动收集儿童的个人信息。家长或监护人应根据儿童的理解能力，对经典医学内容及相关历史资料进行适当指导。</p>
+        </section>
+
+        <section>
+          <h2>10. 数据安全</h2>
+          <p>本 App 主要依赖 iOS 的应用沙盒、设备访问控制和系统安全机制保护本地数据。任何存储方式都无法保证绝对安全，因此建议您妥善保护设备密码，并及时安装系统安全更新。</p>
+        </section>
+
+        <section>
+          <h2>11. 医学与内容说明</h2>
+          <p>本 App 中的古籍原文、注释、方剂、方证、版本比较及其他资料仅用于阅读、学习、研究与文化交流，不构成医疗建议、诊断结论、处方或治疗方案，不能替代执业医师或其他合资格医疗专业人员的判断。</p>
+          <p>如您正在处理具体健康问题、用药问题或紧急情况，请及时咨询合资格医疗专业人员或当地急救机构。请勿仅依据本 App 内容自行诊断、停药、换药或实施治疗。</p>
+        </section>
+
+        <section>
+          <h2>12. 政策更新</h2>
+          <p>我们可能因功能调整、法律要求或服务变化更新本政策。更新后的版本将在本页面公布，并修改页面顶部的更新日期。若变更对您的权利或数据处理方式产生重大影响，我们会通过 App 内适当方式进行提示。</p>
+        </section>
+
+        <section>
+          <h2>13. 联系我们</h2>
+          <div class="contact">
+            <p><strong>开发者：</strong>fish2next</p>
+            <p><strong>电子邮箱：</strong><a href="mailto:fish2next@gmail.com?subject=%E3%80%8A%E4%BC%A4%E5%AF%92%E8%AE%BA%C2%B7%E9%87%91%E5%8C%AE%E8%A6%81%E7%95%A5%E3%80%8B%E9%9A%90%E7%A7%81%E9%97%AE%E9%A2%98">fish2next@gmail.com</a></p>
+            <p><strong>技术支持：</strong><a href="Support.html">打开技术支持页面</a></p>
+          </div>
+        </section>
+      </main>
+    </article>
+
+    <article data-lang="zh-TW">
+      <header>
+        <p class="eyebrow">傷寒論·金匱要略</p>
+        <h1>隱私權政策</h1>
+        <p class="updated">生效及更新日期：2026年7月23日</p>
+        <p class="summary">一句話說明：本 App 無需註冊帳號，不投放廣告，不使用行為追蹤；收藏、筆記、搜尋記錄與學習記錄預設僅儲存在您的裝置上。</p>
+      </header>
+      <main>
+        <section>
+          <h2>1. 適用範圍</h2>
+          <p>本隱私權政策適用於「傷寒論·金匱要略」（以下簡稱「本 App」），說明開發者 fish2next（以下簡稱「我們」）在您使用本 App 時如何處理資訊。</p>
+          <p>本 App 定位為《傷寒論》《金匱要略》及相關資料的閱讀與學習工具，不提供線上問診、疾病診斷、處方開立或治療服務。</p>
+        </section>
+
+        <section>
+          <h2>2. 我們不蒐集的資訊</h2>
+          <p>在目前版本中，本 App 不要求建立帳號，也不會由開發者主動蒐集、儲存或上傳以下資訊：</p>
+          <ul>
+            <li>姓名、手機號碼、電子郵件、證件號碼等身分資訊；</li>
+            <li>精確位置或大致位置；</li>
+            <li>通訊錄、照片、相機、麥克風、健康資料或運動資料；</li>
+            <li>裝置廣告識別碼、用於跨 App 追蹤的識別碼；</li>
+            <li>搜尋內容、閱讀記錄、收藏、筆記或學習進度；</li>
+            <li>用於廣告投放、使用者畫像或個人化行銷的資料。</li>
+          </ul>
+          <p>本 App 不整合廣告 SDK，不進行跨 App 或跨網站追蹤。若未來功能或資料處理方式發生實質變更，我們將先更新本政策，並依適用規則取得必要授權。</p>
+        </section>
+
+        <section>
+          <h2>3. 儲存在裝置上的資料</h2>
+          <p>為提供閱讀和學習功能，本 App 會使用 iOS 提供的本機儲存能力保存以下資料。這些資料預設不會上傳至開發者伺服器：</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>資料類型</th>
+                  <th>用途</th>
+                  <th>儲存位置</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>收藏與個人筆記</td>
+                  <td>保存您標記的條文、方劑及個人學習內容</td>
+                  <td>您的裝置</td>
+                </tr>
+                <tr>
+                  <td>搜尋記錄與閱讀記錄</td>
+                  <td>便於再次查找和繼續閱讀</td>
+                  <td>您的裝置</td>
+                </tr>
+                <tr>
+                  <td>學習狀態與學習進度</td>
+                  <td>顯示個人學習檔案及完成情況</td>
+                  <td>您的裝置</td>
+                </tr>
+                <tr>
+                  <td>閱讀偏好</td>
+                  <td>記住主題、字體、字級、行距、簡繁及複製樣式等設定</td>
+                  <td>您的裝置</td>
+                </tr>
+                <tr>
+                  <td>Pro 權益狀態</td>
+                  <td>識別已購買功能並支援回復購買</td>
+                  <td>裝置及 Apple 提供的購買服務</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">請注意：移除 App、清除裝置內容或更換裝置，可能導致僅儲存在本機且未被系統備份的資料遺失。請勿在個人筆記中保存不必要的敏感個人資訊或病患隱私。</p>
+        </section>
+
+        <section>
+          <h2>4. 系統權限</h2>
+          <h3>通知權限</h3>
+          <p>當您主動開啟節氣提醒或其他學習提醒時，本 App 可能請求通知權限。相關提醒由 iOS 在裝置本機排程；目前版本不使用遠端推播服務，也不會將裝置推播權杖傳送給開發者伺服器。</p>
+          <p>您可以隨時在「系統設定 → 通知 → 傷寒論·金匱要略」中關閉或調整通知權限。拒絕通知權限不會影響經典閱讀、搜尋、收藏和筆記等核心功能。</p>
+
+          <h3>剪貼簿與分享</h3>
+          <p>僅當您主動點選「複製」或「分享」時，本 App 才會依照您的操作將所選文字交給 iOS 剪貼簿或系統分享面板。本 App 不會在背景讀取您的剪貼簿內容。</p>
+        </section>
+
+        <section>
+          <h2>5. App 內購買</h2>
+          <p>Pro 功能的購買、付款、退款和購買記錄由 Apple 的 App Store 與 StoreKit 服務處理。我們不會接觸或保存您的銀行卡號、付款密碼或完整付款資訊。</p>
+          <p>為確認和回復購買，App 可能向 Apple 請求目前 Apple ID 對應的交易或權益狀態。該過程受 Apple 的相關條款與隱私權政策約束。</p>
+        </section>
+
+        <section>
+          <h2>6. 第三方服務與外部連結</h2>
+          <p>本 App 目前不整合第三方廣告、使用者行為分析或社交追蹤 SDK。</p>
+          <p>當您主動開啟隱私權政策、技術支援或其他外部資料連結時，內容會透過瀏覽器或相應第三方服務開啟，其資料處理方式由該服務自己的隱私權政策決定。</p>
+          <p>本頁面託管於 GitHub Pages。造訪本頁面時，GitHub 可能基於安全目的記錄訪客的 IP 位址及基本存取記錄。開發者未在本頁面額外嵌入廣告或第三方統計指令碼。您可查閱 <a href="https://docs.github.com/zh/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub 隱私權聲明</a>。</p>
+        </section>
+
+        <section>
+          <h2>7. 系統備份與資料同步</h2>
+          <p>本 App 不建立開發者帳號系統，也不主動將您的學習資料上傳至我們的伺服器。若您在裝置中啟用了 iCloud 備份或其他 Apple 系統備份功能，iOS 可能依據您的系統設定備份部分 App 資料。此類備份由 Apple 管理，您可在 Apple ID 與 iCloud 設定中查看和管理。</p>
+          <p>除非 App 內明確顯示已提供相應能力，否則請勿將系統備份視為即時跨裝置同步功能。</p>
+        </section>
+
+        <section>
+          <h2>8. 資料保留、刪除與撤回授權</h2>
+          <ul>
+            <li>您可以在 App 提供相應入口時，逐項刪除搜尋記錄、收藏、筆記或學習記錄；</li>
+            <li>移除本 App 通常會刪除裝置上的本機 App 資料；</li>
+            <li>系統備份中的副本可能依照 Apple 的備份政策繼續保留，您可在 iCloud 設定中管理；</li>
+            <li>通知等系統權限可隨時在 iOS 設定中撤回；</li>
+            <li>由於我們不保存您的帳號或學習資料，因此通常不存在需要向開發者申請刪除的伺服器端個人資料。</li>
+          </ul>
+          <p>如您曾透過電子郵件主動聯絡我們，您可以透過下方信箱申請刪除該郵件溝通中由我們保存的個人資訊，但法律要求或處理爭議所必需的資訊除外。</p>
+        </section>
+
+        <section>
+          <h2>9. 兒童隱私</h2>
+          <p>本 App 不以兒童為專門目標使用者，也不會主動蒐集兒童的個人資訊。家長或監護人應依兒童的理解能力，對經典醫學內容及相關歷史資料提供適當指導。</p>
+        </section>
+
+        <section>
+          <h2>10. 資料安全</h2>
+          <p>本 App 主要依賴 iOS 的應用程式沙盒、裝置存取控制和系統安全機制保護本機資料。任何儲存方式都無法保證絕對安全，因此建議您妥善保護裝置密碼，並及時安裝系統安全更新。</p>
+        </section>
+
+        <section>
+          <h2>11. 醫療與內容說明</h2>
+          <p>本 App 中的古籍原文、註釋、方劑、方證、版本比較及其他資料僅用於閱讀、學習、研究與文化交流，不構成醫療建議、診斷結論、處方或治療方案，不能取代執業醫師或其他合資格醫療專業人員的判斷。</p>
+          <p>如您正在處理具體健康問題、用藥問題或緊急情況，請及時諮詢合資格醫療專業人員或當地急救機構。請勿僅依據本 App 內容自行診斷、停藥、換藥或實施治療。</p>
+        </section>
+
+        <section>
+          <h2>12. 政策更新</h2>
+          <p>我們可能因功能調整、法律要求或服務變更更新本政策。更新後的版本將在本頁面公布，並修改頁面頂部的更新日期。若變更對您的權利或資料處理方式產生重大影響，我們會透過 App 內適當方式提示。</p>
+        </section>
+
+        <section>
+          <h2>13. 聯絡我們</h2>
+          <div class="contact">
+            <p><strong>開發者：</strong>fish2next</p>
+            <p><strong>電子郵件：</strong><a href="mailto:fish2next@gmail.com?subject=%E3%80%8A%E5%82%B7%E5%AF%92%E8%AB%96%C2%B7%E9%87%91%E5%8C%B1%E8%A6%81%E7%95%A5%E3%80%8B%E9%9A%B1%E7%A7%81%E5%95%8F%E9%A1%8C">fish2next@gmail.com</a></p>
+            <p><strong>技術支援：</strong><a href="Support.html">開啟技術支援頁面</a></p>
+          </div>
+        </section>
+      </main>
+    </article>
+
+    <footer>© 2026 fish2next · 伤寒论·金匮要略 / 傷寒論·金匱要略</footer>
+  </div>
+
+  <script>
+    (function () {
+      const articles = document.querySelectorAll("[data-lang]");
+      const buttons = document.querySelectorAll("[data-set-lang]");
+      const saved = localStorage.getItem("shanghan-page-language");
+      const browserTraditional = /zh-(TW|HK|MO)/i.test(navigator.language || "");
+      const initial = saved || (browserTraditional ? "zh-TW" : "zh-CN");
+
+      function setLanguage(lang) {
+        articles.forEach(el => el.classList.toggle("active", el.dataset.lang === lang));
+        buttons.forEach(btn => btn.setAttribute("aria-pressed", String(btn.dataset.setLang === lang)));
+        document.documentElement.lang = lang;
+        document.title = lang === "zh-TW"
+          ? "隱私權政策｜傷寒論·金匱要略"
+          : "隐私政策｜伤寒论·金匮要略";
+        localStorage.setItem("shanghan-page-language", lang);
+      }
+
+      buttons.forEach(btn => btn.addEventListener("click", () => setLanguage(btn.dataset.setLang)));
+      setLanguage(initial);
+    })();
+  </script>
+</body>
+</html>
